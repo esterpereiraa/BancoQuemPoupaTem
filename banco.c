@@ -6,10 +6,28 @@ int num_clientes = 0;
 int num_operacoes[MAX_CLIENTES] = {0};
 
 void salvar(){
-    printf("SALVANDO");
+   FILE *file = fopen("clientes.bin", "wb");
+    if (file != NULL) {
+        fwrite(&num_clientes, sizeof(int), 1, file);
+        fwrite(clientes, sizeof(Cliente), num_clientes, file);
+        fwrite(num_operacoes, sizeof(int), num_clientes, file);
+    for (int i = 0; i < num_clientes; i++) {
+      fwrite(operacoes[i], sizeof(Operacao), num_operacoes[i], file);
+    }
+    fclose(file);
+  }
 }
 void carregar(){
-    printf("CARREGANDO\n");
+    FILE *file = fopen("clientes.bin", "rb");
+     if (file != NULL) {
+        fread(&num_clientes, sizeof(int), 1, file);
+        fread(clientes, sizeof(Cliente), num_clientes, file);
+        fread(num_operacoes, sizeof(int), num_clientes, file);
+    for (int i = 0; i < num_clientes; i++) {
+      fread(operacoes[i], sizeof(Operacao), num_operacoes[i], file);
+    }
+    fclose(file);
+  }
 }
 void addCliente(){
     printf("ADD CLIENTES\n");
