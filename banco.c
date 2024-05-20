@@ -90,7 +90,52 @@ void deposito(){
     printf("DEPOSITANDO\n");
 }
 void debito(){
-    printf("DEBITO\n");
+  char cpf[15], senha[20], tipo_conta[10];
+  float debito;
+  printf("Digite o CPF: ");
+  scanf(" %s", cpf);
+  printf("Digite a senha: ");
+  scanf(" %s", senha);
+  printf("Digite o tipo de conta (comum/plus): ");
+  scanf(" %s", tipo_conta);
+
+  for (int i = 0; i < num_clientes; i++) {
+    if (strcmp(clientes[i].cpf, cpf) == 0 &&
+        strcmp(clientes[i].senha, senha) == 0 &&
+        strcmp(clientes[i].tipo_de_conta, tipo_conta) == 0) {
+      printf("Digite o valor a debitar: ");
+      scanf(" %f", &debito);
+
+      float taxa =
+          (strcmp(clientes[i].tipo_de_conta, "comum") == 0) ? 0.05 : 0.03;
+      float valor_final = clientes[i].saldo - debito - (debito * taxa);
+      float limite_negativo =
+          (strcmp(clientes[i].tipo_de_conta, "comum") == 0) ? -1000.0 : -5000.0;
+
+      if (valor_final < limite_negativo) {
+        printf("Saldo insuficiente! A conta não pode ser negativada além do "
+               "limite permitido.\n");
+      } else {
+        clientes[i].saldo = valor_final;
+        Operacao nova_operacao;
+        time_t t = time(NULL);
+        struct tm tm = *localtime(&t);
+        sprintf(nova_operacao.data, "%d-%02d-%02d %02d:%02d:%02d",
+                tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour,
+                tm.tm_min, tm.tm_sec);
+        sprintf(nova_operacao.descricao, "Debito de R$ %.2f, Taxa de %.2f%%",
+                debito, taxa * 100);
+        nova_operacao.valor = -debito - (debito * taxa);
+        operacoes[i][num_operacoes[i]] = nova_operacao;
+        num_operacoes[i]++;
+        salvar();
+        printf("Débito realizado com sucesso! Saldo atual: %.2f\n",
+               clientes[i].saldo);
+      }
+      return;
+    }
+  }
+  printf("CLIENTE NAO ENCONTRADO!\n");
 }
 void extrato(){
     printf("EXTRATO\n");
