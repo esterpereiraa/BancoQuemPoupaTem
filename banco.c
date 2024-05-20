@@ -164,7 +164,26 @@ void debito(){
   printf("CLIENTE NAO ENCONTRADO!\n");
 }
 void extrato(){
-    printf("EXTRATO\n");
+     char cpf[15], senha[20];
+  printf("Digite o CPF: ");
+  scanf(" %s", cpf);
+  printf("Digite a senha: ");
+  scanf(" %s", senha);
+
+  for (int i = 0; i < num_clientes; i++) {
+    if (strcmp(clientes[i].cpf, cpf) == 0 &&
+        strcmp(clientes[i].senha, senha) == 0) {
+      printf("*** EXTRATO ***\n");
+      for (int j = 0; j < num_operacoes[i]; j++) {
+        printf("Data: %s\n", operacoes[i][j].data);
+        printf("Descrição: %s\n", operacoes[i][j].descricao);
+        printf("Valor: %.2f\n", operacoes[i][j].valor);
+        printf("-----------------------------\n");
+      }
+      return;
+    }
+  }
+  printf("CLIENTE NAO ENCONTRADO\n");
 }
 void transferencia(){
     printf("TRANSFERENCIA\n");
