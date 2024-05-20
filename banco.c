@@ -54,7 +54,16 @@ void addCliente(){
   printf("Novo cliente cadastrado!!!\n");
 }
 void listando(){
-    printf("LISTANDO CLIENTES\n");
+    printf("       LISTANDO CLIENTES\n");
+  for (int i = 0; i < num_clientes; i++) {
+    printf("============ CLIENTE %d ==================\n\n", i + 1);
+    printf("Nome: %s\n", clientes[i].nome);
+    printf("CPF: %s\n", clientes[i].cpf);
+    printf("Tipo de conta: %s\n", clientes[i].tipo_de_conta);
+    printf("Saldo: %.2f\n", clientes[i].saldo);
+    printf("Senha: %s\n", clientes[i].senha);
+    printf("==========================================\n\n");
+  }
 }
 void apagar(){
     printf("APAGANDO CLIENTES\n");
