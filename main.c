@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include "banco.h" 
 
 int main(){
-
+ 
+    carregar();
     while(1){
         int opcao;
         printf("\nMENU PRINCIPAL\n");
@@ -18,26 +20,27 @@ int main(){
     switch (opcao)
 
     {
+        // CHAMANDO AS FUNCOES
     case 1:
-        printf("Novo cliente\n");
+        addCliente();
         break;
      case 2:
-        printf("Apagar cliente\n");
+        apagar();
         break;
     case 3:
-        printf("Listar clientes\n");
+        listando();
         break;
     case 4:
-        printf("Débito\n");
+        debito();
         break;
     case 5:
-        printf("Depósito\n");
+        deposito();
         break;
     case 6:
-        printf("Extrato\n");
+        extrato();
         break;
     case 7:
-        printf("Transferência entre contas\n");
+        transferencia();
         break;
     case 0:  
         printf("Sair\n");
