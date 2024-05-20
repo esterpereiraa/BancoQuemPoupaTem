@@ -54,8 +54,10 @@ void addCliente(){
   printf("Novo cliente cadastrado!!!\n");
 }
 void listando(){
-    printf("       LISTANDO CLIENTES\n");
+   
+  printf("          LISTANDO CLIENTES\n");
   for (int i = 0; i < num_clientes; i++) {
+     
     printf("============ CLIENTE %d ==================\n\n", i + 1);
     printf("Nome: %s\n", clientes[i].nome);
     printf("CPF: %s\n", clientes[i].cpf);
@@ -66,8 +68,24 @@ void listando(){
   }
 }
 void apagar(){
-    printf("APAGANDO CLIENTES\n");
+     char cpf[15];
+  printf("Digite o CPF: ");
+  scanf(" %s", cpf);
+
+  for (int i = 0; i < num_clientes; i++) {
+    if (strcmp(clientes[i].cpf, cpf) == 0) {
+      for (int j = i; j < num_clientes - 1; j++) {
+        clientes[j] = clientes[j + 1];
+      }
+      num_clientes--;
+      salvar();
+      printf("Cliente apagado!\n");
+      return;
+    }
+  }
+  printf("Cliente não encontrado!\n");
 }
+
 void deposito(){
     printf("DEPOSITANDO\n");
 }
