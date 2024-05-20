@@ -30,7 +30,28 @@ void carregar(){
   }
 }
 void addCliente(){
-    printf("ADD CLIENTES\n");
+    if (num_clientes >= MAX_CLIENTES) {
+    printf("MAXIMO DE CLIENTES ATINGIDO\n");
+    return;
+  }
+
+  Cliente novo_cliente;
+  printf("BEM VINDO NOVO CLIENTE \n");
+  printf("NOME: ");
+  scanf(" %[^\n]%*c", novo_cliente.nome);
+  printf("CPF: ");
+  scanf(" %s", novo_cliente.cpf);
+  printf("CONTA (comum/plus): ");
+  scanf(" %s", novo_cliente.tipo_de_conta);
+  printf("SALDO INCIAL: ");
+  scanf(" %f", &novo_cliente.saldo);
+  printf("SENHA: ");
+  scanf(" %s", novo_cliente.senha);
+
+  clientes[num_clientes] = novo_cliente;
+  num_clientes++;
+  salvar();
+  printf("Novo cliente cadastrado!!!\n");
 }
 void listando(){
     printf("LISTANDO CLIENTES\n");
