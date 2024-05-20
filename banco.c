@@ -87,7 +87,33 @@ void apagar(){
 }
 
 void deposito(){
-    printf("DEPOSITANDO\n");
+    char cpf[15];
+  float deposito;
+  printf("Digite o CPF: ");
+  scanf(" %s", cpf);
+  printf("Digite o valor do deposito: ");
+  scanf(" %f", &deposito);
+
+  for (int i = 0; i < num_clientes; i++) {
+    if (strcmp(clientes[i].cpf, cpf) == 0) {
+      clientes[i].saldo += deposito;
+      Operacao nova_operacao;
+      time_t t = time(NULL);
+      struct tm tm = *localtime(&t);
+      sprintf(nova_operacao.data, "%d-%02d-%02d %02d:%02d:%02d",
+              tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour,
+              tm.tm_min, tm.tm_sec);
+      sprintf(nova_operacao.descricao, "Deposito de R$ %.2f", deposito);
+      nova_operacao.valor = deposito;
+      operacoes[i][num_operacoes[i]] = nova_operacao;
+      num_operacoes[i]++;
+      salvar();
+      printf("Deposito realizado com sucesso! Saldo atual: %.2f\n",
+             clientes[i].saldo);
+      return;
+    }
+  }
+  printf("CLIENTE NAO ENCONTRADO!\n");
 }
 void debito(){
   char cpf[15], senha[20], tipo_conta[10];
