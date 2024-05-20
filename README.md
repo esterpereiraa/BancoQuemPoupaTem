@@ -35,7 +35,7 @@
  
   ## Como pode ser compilado e executado
 - Programa criado em C
-- Para compilar é necessario que uma IDE que compile códigos em C com a biblioteca `string.h`, `time.h`, `stdlib.h` e `string.h`e para executar é necessário utilzar o comando `gcc *.c && ./a.out `
+- Para compilar é necessario que uma IDE que compile códigos em C com a biblioteca `string.h`, `time.h`, `stdlib.h` e `string.h`. Para executar é necessário utilzar o comando `gcc *.c && ./a.out `
 
 
 
